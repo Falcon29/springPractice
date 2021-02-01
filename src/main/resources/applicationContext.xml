@@ -7,12 +7,39 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
+    <!-- Init. Factory and Destroy methods -->
     <bean id="musicBean"
-          class="ru.ache.springpractice.RockMusic">
+          class="ru.ache.springpractice.RockMusic"
+          init-method="doMyInit"
+          destroy-method="doMyDestroy"
+          factory-method="getRockMusic">
     </bean>
 
-    <bean id="jazzMusicBean"
-          class="ru.ache.springpractice.JazzMusic">
+    <!-- singleton (by default) -->
+    <bean id="musicPlayer"
+          class="ru.ache.springpractice.MusicPlayer">
+<!--  через конструктор
+        <constructor-arg ref="musicBean" />-->
+<!--   setter   вручную  -->
+        <property name="music" ref="musicBean"/>
+        <property name="name" value="SomeName"/>
+        <property name="volume" value="50"/>
+<!--   setter через properties     -->
+        <property name="queue" value="${musicPlayer.queue}"/>
+    </bean>
+
+    <bean id="musicPlayerPrototype"
+          class="ru.ache.springpractice.MusicPlayer">
+        <!--  через конструктор
+                <constructor-arg ref="musicBean" />-->
+        <!--   setter   вручную  -->
+        <property name="music" ref="musicBean"/>
+        <property name="name" value="SomeName"/>
+        <property name="volume" value="50"/>
+        <!--   setter через properties     -->
+        <property name="queue" value="${musicPlayer.queue}"/>
     </bean>
 
 </beans>

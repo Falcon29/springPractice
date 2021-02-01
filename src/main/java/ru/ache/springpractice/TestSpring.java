@@ -26,14 +26,38 @@ public class TestSpring {
                 "applicationContext.xml"
         );
 
-        Music music = context.getBean( "musicBean", Music.class );
-        Music musicJazz = context.getBean( "jazzMusicBean", Music.class );
+        //Music music = context.getBean( "musicBean", Music.class );
+        //Music musicJazz = context.getBean( "jazzMusicBean", Music.class );
+        //MusicPlayer musicPlayer = new MusicPlayer( music );
+        //MusicPlayer musicPlayerJazz = new MusicPlayer( musicJazz );
 
-        MusicPlayer musicPlayer = new MusicPlayer( music );
-        MusicPlayer musicPlayerJazz = new MusicPlayer( musicJazz );
+        //Singleton
+        MusicPlayer musicPlayer = context.getBean( "musicPlayer", MusicPlayer.class );
+        MusicPlayer secondMusicPlayer = context.getBean( "musicPlayer", MusicPlayer.class );
+
+        System.out.println( musicPlayer == secondMusicPlayer ); //true
+        musicPlayer.setVolume( 10 );
+        secondMusicPlayer.getVolume(); //10 'cause SINGLETON
 
         musicPlayer.playMusic();
-        musicPlayerJazz.playMusic();
+        //musicPlayerJazz.playMusic();
+        System.out.println( musicPlayer.getName() );
+        System.out.println( musicPlayer.getVolume() );
+        System.out.println( musicPlayer.getQueue() );
+
+        //Prototype
+        MusicPlayer musicPlayerProto = context.getBean( "musicPlayerPrototype", MusicPlayer.class );
+        MusicPlayer secondMusicPlayerProto = context.getBean( "musicPlayerPrototype", MusicPlayer.class );
+
+        System.out.println( musicPlayerProto == secondMusicPlayerProto ); //false
+        musicPlayerProto.setVolume( 10 );
+        musicPlayerProto.getVolume();  //10 'cause Prototype
+        secondMusicPlayerProto.getVolume();  //50 'cause Prototype and setted in properties/appContext.xml
+
+        //Lifecycle of bean
+        RockMusic rockMusic = context.getBean( "musicBean", RockMusic.class );
+
+        System.out.println( rockMusic.getSong() );
 
         context.close();
     }

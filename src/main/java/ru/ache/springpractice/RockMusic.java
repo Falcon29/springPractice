@@ -19,8 +19,24 @@
 package ru.ache.springpractice;
 
 public class RockMusic implements Music {
+    private RockMusic() {} //ограничение создания объектов класса через new
+
+    public static RockMusic getRockMusic() {
+        return new RockMusic();         //если скоуп Синглтон, то объект будет использоваться каждый раз один и тот же
+    }
+
     @Override
     public String getSong() {
         return "Bohemian Rhapsody";
+    }
+
+    //Init method
+    public void doMyInit() {
+        System.out.println( "Initializing..." );
+    }
+
+    //Destroy method
+    public void doMyDestroy() {
+        System.out.println( "Ending..." );
     }
 }
