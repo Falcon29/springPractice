@@ -18,25 +18,22 @@
 
 package ru.ache.springpractice;
 
-public class RockMusic implements Music {
-    private RockMusic() {} //ограничение создания объектов класса через new
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-    public static RockMusic getRockMusic() {
-        return new RockMusic();         //если скоуп Синглтон, то объект будет использоваться каждый раз один и тот же
+@Component
+public class Computer {
+    private int id;
+    private MusicPlayer musicPlayer;
+
+    @Autowired
+    public Computer(MusicPlayer musicPlayer) {
+        this.id = 1;
+        this.musicPlayer = musicPlayer;
     }
 
     @Override
-    public String getSong() {
-        return "Bohemian Rhapsody";
-    }
-
-    //Init method
-    public void doMyInit() {
-        System.out.println( "Initializing..." );
-    }
-
-    //Destroy method
-    public void doMyDestroy() {
-        System.out.println( "Ending..." );
+    public String toString() {
+        return "Computer " + id + " " + musicPlayer.playMusic();
     }
 }

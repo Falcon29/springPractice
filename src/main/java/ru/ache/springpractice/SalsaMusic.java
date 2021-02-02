@@ -18,25 +18,12 @@
 
 package ru.ache.springpractice;
 
-public class RockMusic implements Music {
-    private RockMusic() {} //ограничение создания объектов класса через new
+import org.springframework.stereotype.Component;
 
-    public static RockMusic getRockMusic() {
-        return new RockMusic();         //если скоуп Синглтон, то объект будет использоваться каждый раз один и тот же
-    }
-
+@Component("salsaId")
+public class SalsaMusic implements Music {
     @Override
     public String getSong() {
-        return "Bohemian Rhapsody";
-    }
-
-    //Init method
-    public void doMyInit() {
-        System.out.println( "Initializing..." );
-    }
-
-    //Destroy method
-    public void doMyDestroy() {
-        System.out.println( "Ending..." );
+        return "Salsa Vitamina";
     }
 }
