@@ -9,7 +9,9 @@
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
-    <!-- Init. Factory and Destroy methods -->
+    <!-- THIS IS LESSONS 1-8  UNCOMMENT THIS
+
+    <!- Init. Factory and Destroy methods ->
     <bean id="musicBean"
           class="ru.ache.springpractice.RockMusic"
           init-method="doMyInit"
@@ -17,29 +19,33 @@
           factory-method="getRockMusic">
     </bean>
 
-    <!-- singleton (by default) -->
+    <!- singleton (by default) ->
     <bean id="musicPlayer"
           class="ru.ache.springpractice.MusicPlayer">
-<!--  через конструктор
-        <constructor-arg ref="musicBean" />-->
-<!--   setter   вручную  -->
+<!-  через конструктор
+        <constructor-arg ref="musicBean" />->
+<!-   setter   вручную  ->
         <property name="music" ref="musicBean"/>
         <property name="name" value="SomeName"/>
         <property name="volume" value="50"/>
-<!--   setter через properties     -->
+<!-   setter через properties     ->
         <property name="queue" value="${musicPlayer.queue}"/>
     </bean>
 
     <bean id="musicPlayerPrototype"
           class="ru.ache.springpractice.MusicPlayer">
-        <!--  через конструктор
-                <constructor-arg ref="musicBean" />-->
-        <!--   setter   вручную  -->
+        <!-  через конструктор
+                <constructor-arg ref="musicBean" />->
+        <!-   setter   вручную  ->
         <property name="music" ref="musicBean"/>
         <property name="name" value="SomeName"/>
         <property name="volume" value="50"/>
-        <!--   setter через properties     -->
+        <!-   setter через properties     ->
         <property name="queue" value="${musicPlayer.queue}"/>
     </bean>
+    UNCOMMENT THIS and add some '- ss'-->
+
+    <!-- ANNOTATIONS, все что выше - не нужно -->
+    <context:component-scan base-package="ru.ache.springpractice"/>
 
 </beans>
