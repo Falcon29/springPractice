@@ -20,24 +20,36 @@ package ru.ache.springpractice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MusicPlayer {
     private SalsaMusic salsaMusic;
     private TimbaMusic timbaMusic;
-    private Music music;
 
     @Autowired
-    public MusicPlayer(SalsaMusic salsaMusic, TimbaMusic timbaMusic) {
+    public MusicPlayer( SalsaMusic salsaMusic, TimbaMusic timbaMusic ) {
         this.salsaMusic = salsaMusic;
         this.timbaMusic = timbaMusic;
     }
 
-    public String playMusic() {
-        return "Playing: " + salsaMusic.getSong();
+    public void playMusic(MusicGenre genre) {
+        Random random = new Random();
+
+        int randomNumber = random.nextInt(3);
+
+        switch(genre) {
+            case SALSA:
+                System.out.println(salsaMusic.getSong().get(randomNumber));
+                break;
+            case TIMBA:
+                System.out.println(timbaMusic.getSong().get(randomNumber));
+                break;
+        }
     }
 
 }

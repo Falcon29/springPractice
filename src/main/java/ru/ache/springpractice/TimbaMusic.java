@@ -18,12 +18,23 @@
 
 package ru.ache.springpractice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class TimbaMusic implements Music {
+    private List<String> songs = new ArrayList<>();
+
+    {
+        songs.add("Mi Chula");
+        songs.add("Historia Vernadera");
+        songs.add("Pasaporte");
+    }
+
     @Override
-    public String getSong() {
-        return "Nino";
+    public List<String> getSong() {
+        return songs;
     }
 }
