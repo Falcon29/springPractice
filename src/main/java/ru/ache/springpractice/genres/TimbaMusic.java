@@ -16,22 +16,27 @@
  *
  */
 
-package ru.ache.springpractice;
+package ru.ache.springpractice.genres;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
-public class Computer {
-    private int id;
-    private MusicPlayer musicPlayer;
-    
-    public Computer(MusicPlayer musicPlayer) {
-        this.id = 1;
-        this.musicPlayer = musicPlayer;
+import ru.ache.springpractice.Music;
+
+//@Component
+public class TimbaMusic implements Music {
+    private List<String> songs = new ArrayList<>();
+
+    {
+        songs.add("Mi Chula");
+        songs.add("Historia Vernadera");
+        songs.add("Pasaporte");
     }
 
     @Override
-    public String toString() {
-        return "Computer " + id + " " + musicPlayer.playMusic();
+    public List<String> getSong() {
+        return songs;
     }
 }

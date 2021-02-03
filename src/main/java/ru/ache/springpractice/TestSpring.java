@@ -18,10 +18,10 @@
 
 package ru.ache.springpractice;
 
-import java.awt.*;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import ru.ache.springpractice.config.SpringConfig;
+import ru.ache.springpractice.genres.MusicGenre;
 
 public class TestSpring {
     public static void main( String[] args ) {
@@ -29,10 +29,9 @@ public class TestSpring {
                 SpringConfig.class
         );
 
-        MusicPlayer musicPlayer = context.getBean( "musicPlayer", MusicPlayer.class );
+        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
 
-        musicPlayer.playMusic( MusicGenre.SALSA );
-        musicPlayer.playMusic( MusicGenre.TIMBA );
+        System.out.println(musicPlayer.playMusic());
 
         context.close();
     }

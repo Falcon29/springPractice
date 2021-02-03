@@ -1,9 +1,11 @@
-package ru.ache.springpractice;
+package ru.ache.springpractice.genres;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import ru.ache.springpractice.Music;
 
 //@Component
 public class SalsaMusic implements Music {

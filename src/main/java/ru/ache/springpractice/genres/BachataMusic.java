@@ -16,21 +16,20 @@
  *
  */
 
-package ru.ache.springpractice;
+package ru.ache.springpractice.genres;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import ru.ache.springpractice.Music;
 
-//@Component
-public class TimbaMusic implements Music {
+public class BachataMusic implements Music {
     private List<String> songs = new ArrayList<>();
 
     {
-        songs.add("Mi Chula");
-        songs.add("Historia Vernadera");
-        songs.add("Pasaporte");
+        songs.add("Te Amor");
+        songs.add("Si Esta Casa Hablara");
+        songs.add("Corazon");
     }
 
     @Override

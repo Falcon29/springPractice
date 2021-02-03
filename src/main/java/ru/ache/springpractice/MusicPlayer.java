@@ -18,39 +18,41 @@
 
 package ru.ache.springpractice;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MusicPlayer {
-    private SalsaMusic salsaMusic;
-    private TimbaMusic timbaMusic;
+    @Value("${musicPlayer.name}")
+    private String name;
 
-    @Autowired
-    public MusicPlayer( @Qualifier("salsaMusic") SalsaMusic salsaMusic,
-                        @Qualifier("timbaMusic") TimbaMusic timbaMusic ) {
-        this.salsaMusic = salsaMusic;
-        this.timbaMusic = timbaMusic;
+    @Value("${musicPlayer.volume}")
+    private int volume;
+
+    private List<Music> musicList;
+
+    public MusicPlayer( List<Music> musicList) {
+        this.musicList = musicList;
     }
 
-    public void playMusic(MusicGenre genre) {
+    public String getName() {
+        return name;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public String playMusic() {
         Random random = new Random();
 
-        int randomNumber = random.nextInt(3);
-
-        switch(genre) {
-            case SALSA:
-                System.out.println(salsaMusic.getSong().get(randomNumber));
-                break;
-            case TIMBA:
-                System.out.println(timbaMusic.getSong().get(randomNumber));
-                break;
-        }
+        return "Playing: " + musicList.get(random.nextInt(musicList.size())).getSong()
+                + " with volume " + this.volume;
     }
 
 }
