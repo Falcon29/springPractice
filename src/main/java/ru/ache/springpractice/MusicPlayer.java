@@ -32,7 +32,8 @@ public class MusicPlayer {
     private TimbaMusic timbaMusic;
 
     @Autowired
-    public MusicPlayer( SalsaMusic salsaMusic, TimbaMusic timbaMusic ) {
+    public MusicPlayer( @Qualifier("salsaMusic") SalsaMusic salsaMusic,
+                        @Qualifier("timbaMusic") TimbaMusic timbaMusic ) {
         this.salsaMusic = salsaMusic;
         this.timbaMusic = timbaMusic;
     }
